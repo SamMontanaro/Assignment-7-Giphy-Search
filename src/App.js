@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <h1 className='p-3 bg-dark text-light text-center'>Giphy Search</h1>
-      <SearchField onSubmitSearch={setGifs(input)}></SearchField>
+      <SearchField onSubmitSearch={setGifs}></SearchField>
       <div className='container'>
         {
           gifs.map(e => {
