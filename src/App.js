@@ -20,20 +20,16 @@ function App() {
     fetchTrending();
   }, [])
 
-  const useInput = (input) => {
-    setGifs(input);
-  }
-
   return (
     <div className="App">
       <h1 className='p-3 bg-dark text-light text-center'>Giphy Search</h1>
-      <SearchField onSubmitSearch={useInput}></SearchField>
+      <SearchField onSubmitSearch={setGifs(input)}></SearchField>
       <div className='container'>
-      {
-        gifs.map(e => {
-          return <img key={e.id} className='img-fluid col-2' src={e.images.original.url} alt='GIPHY Results'></img>
-        })
-      }
+        {
+          gifs.map(e => {
+            return <img key={e.id} className='img-fluid col-2' src={e.images.original.url} alt='GIPHY Results'></img>
+          })
+        }
       </div>
     </div>
   );
