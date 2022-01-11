@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import SearchField from './Components/SearchField';
 import './App.css';
 
 function App() {
+  const api_key = "4Uqlux8KuvAH0FneRmAkDpYXWZsLC8rm";
+  const [gifs, setGifs] = useState([]);
+
+  const fetchTrending = async () => {
+    await axios
+    .get("http://api.giphy.com/v1/gifs/trending?api_key=" + api_key)
+    .then(response => {
+      console.log(response.data.data);
+      setGifs(response.data.data);
+    })
+  }
+
+  useEffect(() => {
+    fetchTrending();
+  }, [])
+
+  const useInput = (input) => {
+    setGifs(input);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className='p-3 bg-dark text-light text-center'>Giphy Search</h1>
+      <SearchField onSubmitSearch={useInput}></SearchField>
+      <div className='container'>
+      {
+        gifs.map(e => {
+          return <img key={e.id} className='img-fluid col-2' src={e.images.original.url} alt='GIPHY Results'></img>
+        })
+      }
+      </div>
     </div>
   );
 }
