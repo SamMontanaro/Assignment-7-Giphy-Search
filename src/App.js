@@ -11,8 +11,15 @@ function App() {
     await axios
     .get("http://api.giphy.com/v1/gifs/trending?api_key=" + api_key)
     .then(response => {
-      console.log(response.data.data);
       setGifs(response.data.data);
+    })
+  }
+
+  const fetchRandom = async () => {
+    await axios
+    .get("http://api.giphy.com/v1/gifs/random?api_key=" + api_key)
+    .then(response => {
+      setGifs(new Array(response.data.data));
     })
   }
 
@@ -24,6 +31,7 @@ function App() {
     <div className="App">
       <h1 className='p-3 bg-dark text-light text-center'>Giphy Search</h1>
       <SearchField onSubmitSearch={setGifs}></SearchField>
+      <button className='btn btn-dark d-flex justify-content-center mx-auto mb-3' onClick={fetchRandom}>Random!</button>
       <div className='container'>
         {
           gifs.map(e => {
