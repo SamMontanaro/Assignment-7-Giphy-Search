@@ -33,11 +33,13 @@ function App() {
       <SearchField onSubmitSearch={setGifs}></SearchField>
       <button className='btn btn-dark d-flex justify-content-center mx-auto mb-3' onClick={fetchRandom}>Random!</button>
       <div className='container'>
-        {
-          gifs.map(e => {
-            return <img key={e.id} className='img-fluid col-2' src={e.images.original.url} alt='GIPHY Results'></img>
-          })
-        }
+        <div className='row'>
+          {
+            gifs.map(e => {
+              return <img key={e.id} className='img-fluid col-4 col-lg-2 mb-3 mx-auto' src={e.images.original.url} alt='GIPHY Results'></img>
+            })
+          }
+        </div>
       </div>
     </div>
   );
